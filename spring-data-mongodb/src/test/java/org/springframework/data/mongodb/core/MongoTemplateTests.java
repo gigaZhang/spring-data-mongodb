@@ -1706,6 +1706,25 @@ public class MongoTemplateTests {
 		assertThat(result.model.value(), is(newModelValue));
 	}
 
+	/**
+	 * DATAMONGO-703
+	 */
+	@Test
+	public void customStringIdsGreaterThan24CharsShouldWork() {
+
+		Sample sample = new Sample();
+		sample.id = "123456789012345678901234567890";
+		sample.field = "foobar";
+
+		template.insert(sample);
+
+		Sample result = template.findById(sample.id, Sample.class);
+
+		assertThat(result, is(notNullValue()));
+		assertThat(result.id, is(sample.id));
+		assertThat(result.field, is(sample.field));
+	}
+
 	static interface Model {
 		String value();
 
