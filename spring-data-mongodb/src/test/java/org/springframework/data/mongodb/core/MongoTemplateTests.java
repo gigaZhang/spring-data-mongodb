@@ -1710,10 +1710,10 @@ public class MongoTemplateTests {
 	 * DATAMONGO-703
 	 */
 	@Test
-	public void customStringIdsGreaterThan24CharsShouldWork() {
+	public void customStringIdsWith24CharsShouldWork() {
 
 		Sample sample = new Sample();
-		sample.id = "123456789012345678901234567890";
+		sample.id = "123456789012345678901234";
 		sample.field = "foobar";
 
 		template.insert(sample);
